@@ -1,0 +1,35 @@
+:root {
+  --text-color: #000000;
+  --text-accent: #fe5f1e;
+
+  --background: #ffdf8c;
+
+  --button-type: #f9f9f9;
+  --button-type-accent: #282828;
+  --button-accent: #fe5f1e;
+
+  --ui-bg: #f3f3f3;
+  --ui-button-active: #ffffff;
+
+  --font-regular: 'Proxima Nova Regular';
+  --font-bold: 'Proxima Nova Bold';
+  --font-extrabold: 'Proxima Nova Extra Bold';
+}
+
+@font-face {
+  font-family: 'Proxima Nova Bold';
+  font-weight: 700;
+  src: url('../fonts/proximanova_bold.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Proxima Nova Extra Bold';
+  font-weight: 800;
+  src: url('../fonts/proximanova_extrabold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Proxima Nova Regular';
+  font-weight: 400;
+  src: url('../fonts/proximanova_regular.ttf') format('truetype');
+}
