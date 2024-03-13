@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, ref, onMounted } from 'vue'
-import { useCartStore } from '../stores/cartStore'
+import { useCartStore } from '../../stores/cartStore'
 
 const props = defineProps({
   id: Number,
@@ -58,6 +58,7 @@ function addOnClick() {
     size: selectedSize.label,
     thickness: selectedThickness.label,
     price: selectedSize.price,
+    imgUrl: props.imgUrl,
     amount: 1
   }
 
@@ -138,3 +139,7 @@ onMounted(() => {
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+@import './Index.scss';
+</style>

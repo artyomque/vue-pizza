@@ -73,4 +73,6 @@ const typeButtons = ref([
   </div>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+@import './Index.scss';
+</style>

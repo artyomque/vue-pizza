@@ -1,5 +1,5 @@
 <script setup>
-import Card from './Card.vue'
+import Card from '../Card/Index.vue'
 
 defineProps({
   items: Array
@@ -22,3 +22,7 @@ defineProps({
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+@import './Index.scss';
+</style>
