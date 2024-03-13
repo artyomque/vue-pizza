@@ -1,5 +1,6 @@
 <script setup>
 import { storeToRefs } from 'pinia'
+import axios from 'axios'
 import { useCartStore } from '../../stores/cartStore'
 
 const cartStore = useCartStore()
@@ -12,7 +13,7 @@ async function makeOrder() {
       totalPrice: cartStore.totalPrice
     })
 
-    await axios.patch()
+    cartStore.clearCart()
   } catch (e) {
     console.log(e)
   }
@@ -50,7 +51,7 @@ async function makeOrder() {
         >Вернуться назад
       </button>
     </router-link>
-    <button class="cart-controls__btn-order">Оплатить сейчас</button>
+    <button @click="makeOrder()" class="cart-controls__btn-order">Оплатить сейчас</button>
   </div>
 </template>
 
