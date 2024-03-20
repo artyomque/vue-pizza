@@ -1,7 +1,7 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import axios from 'axios'
-import { useCartStore } from '../../stores/cartStore'
+import { useCartStore } from '@/stores/cartStore'
 
 const cartStore = useCartStore()
 const { cart } = storeToRefs(cartStore)
@@ -13,7 +13,22 @@ async function makeOrder() {
       totalPrice: cartStore.totalPrice
     })
 
+    // popularity update
+
+    const response = await axios.get('https://2d78f5128d00b9fb.mokky.dev/items')
+
+    const items = response.data
+
+    for (const cartItem of cart.value) {
+      const matchingItem = items.find((item) => item.title === cartItem.title)
+      if (matchingItem) {
+        matchingItem.popularity++
+      }
+    }
+
     cartStore.clearCart()
+
+    await axios.patch(`https://2d78f5128d00b9fb.mokky.dev/items`, items)
   } catch (e) {
     console.log(e)
   }

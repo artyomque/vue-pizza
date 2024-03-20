@@ -10,7 +10,7 @@ const cartStore = useCartStore()
 
 <template>
   <header class="header">
-    <div class="container">
+    <div class="header-wrapper">
       <router-link to="/">
         <div class="header__info">
           <img src="/logo.png" class="header__logo" alt="Vue Pizza" />
@@ -34,6 +34,11 @@ const cartStore = useCartStore()
         </button>
       </router-link>
     </div>
+    <router-link to="/cart">
+      <button v-show="route.path !== '/cart'" class="cart-btn--mobile">
+        <img class="cart-btn--mobile__img" src="/cart.svg" alt="" />
+      </button>
+    </router-link>
   </header>
 </template>
 

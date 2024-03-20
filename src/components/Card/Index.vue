@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, ref, onMounted } from 'vue'
-import { useCartStore } from '../../stores/cartStore'
+import { useCartStore } from '@/stores/cartStore'
 
 const props = defineProps({
   id: Number,

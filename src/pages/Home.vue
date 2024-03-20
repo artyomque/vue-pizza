@@ -1,11 +1,24 @@
 <script setup>
-import { reactive, provide, watch, onMounted, ref } from 'vue'
+import { reactive, provide, watch, onMounted, computed, ref } from 'vue'
+import { storeToRefs } from 'pinia'
 import axios from 'axios'
 
-import Sort from '../components/Sort/Index.vue'
-import CardList from '../components/CardList/Index.vue'
+import Sort from '@/components/Sort/Index.vue'
+import CardList from '@/components/CardList/Index.vue'
+import Pagination from '@/components/Pagination/Index.vue'
+import { usePaginationStore } from '@/stores/paginationStore'
 
 const items = ref([])
+
+const paginationStore = usePaginationStore()
+const { currentPage, itemsPerPage } = storeToRefs(paginationStore)
+
+const displayedItems = computed(() => {
+  const startIndex = (currentPage.value - 1) * itemsPerPage.value
+  const endIndex = startIndex + itemsPerPage.value
+
+  return items.value.slice(startIndex, endIndex)
+})
 
 const filters = reactive({
   sortBy: '-popularity',
@@ -37,6 +50,8 @@ async function fetchItems() {
         return getPrice(a) - getPrice(b)
       })
     }
+
+    return data
   } catch (e) {
     console.log(e)
   }
@@ -57,7 +72,8 @@ onMounted(async () => {
 
 <template>
   <Sort :filters="filters" />
-  <CardList :items="items" />
+  <CardList :items="displayedItems" />
+  <Pagination :items="items" />
 </template>
 
 <style lang="scss"></style>

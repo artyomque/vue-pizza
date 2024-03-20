@@ -1,15 +1,23 @@
+@import '../../assets/scss/main.scss';
+
 .sort-section {
   display: flex;
-  padding: 0 40px;
+  gap: 15px;
   margin-bottom: 32px;
 
   justify-content: space-between;
   align-items: center;
+
+  @include mobile() {
+    flex-direction: column;
+    align-items: normal;
+  }
 }
 
 .pizza-type {
   display: flex;
   gap: 9px;
+  overflow-x: auto;
 
   &__button {
     padding: 15px 35px;
@@ -43,6 +51,7 @@
 .select__wrapper {
   font-family: var(--font-bold);
   font-size: 14px;
+  text-wrap: nowrap;
 
   &__option {
   }

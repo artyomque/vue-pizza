@@ -1,8 +1,19 @@
+@import '../../assets/scss/main.scss';
+
 .header {
   margin-bottom: 40px;
   padding: 40px;
-
   border-bottom: 1px solid var(--delimiter);
+
+  @include mobile() {
+    padding: clamp(20px, 0.357rem + 4.46vw, 40px);
+  }
+
+  &-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+  }
 
   &__info {
     display: flex;
@@ -29,17 +40,17 @@
     font-family: var(--font-regular);
     font-size: 16px;
     color: #7b7b7b;
-  }
-}
 
-.container {
-  display: flex;
-  justify-content: space-between;
+    @include mobile-sm() {
+      text-wrap: balance;
+    }
+  }
 }
 
 .cart-btn {
   display: flex;
   max-height: 50px;
+  min-width: 133px;
   gap: 13px;
   padding: 13px 23px;
   border-radius: 30px;
@@ -49,6 +60,10 @@
   font-family: var(--font-bold);
 
   align-items: center;
+
+  @include mobile() {
+    display: none;
+  }
 
   &:hover {
     transition: background-color 0.2s ease-in;
@@ -69,5 +84,25 @@
   &__items {
     display: flex;
     gap: 8px;
+  }
+
+  &--mobile {
+    display: none;
+    position: fixed;
+    right: 3%;
+    bottom: 2%;
+    background-color: var(--button-accent);
+    padding: 15px;
+    border-radius: 50%;
+    z-index: 5;
+
+    @include mobile() {
+      display: block;
+    }
+
+    &__img {
+      height: 20px;
+      width: 20px;
+    }
   }
 }
