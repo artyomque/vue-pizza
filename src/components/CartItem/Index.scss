@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: space-between;
 
-  @media (max-width: 768px) {
+  @include mobile() {
     flex-direction: column;
     gap: 15px;
   }
@@ -34,12 +34,21 @@
     font-family: var(--font-bold);
     font-size: 22px;
     width: 250px;
+
+    @include mobile() {
+      font-size: clamp(17px, 0.839rem + 1.12vw, 22px);
+      max-width: 175px;
+    }
   }
 
   &__details {
     font-family: var(--font-regular);
     font-size: 16px;
     color: #8d8d8d;
+
+    @include mobile() {
+      font-size: clamp(0.875rem, 0.786rem + 0.45vw, 1rem);
+    }
   }
 }
 
@@ -81,6 +90,7 @@
   &__price {
     font-family: var(--font-bold);
     font-size: 22px;
+    text-wrap: nowrap;
 
     @include mobile() {
       font-size: 19px;
