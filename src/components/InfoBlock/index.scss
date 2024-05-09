@@ -1,0 +1,56 @@
+@import '@/assets/scss/main.scss';
+
+.info-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    margin-bottom: 10px;
+
+    font-family: var(--font-bold);
+    font-size: 32px;
+
+    @include mobile() {
+      font-size: clamp(24px, 1.143rem + 1.79vw, 32px);
+    }
+  }
+
+  &__text {
+    margin-bottom: 47px;
+
+    font-family: var(--font-regular);
+    line-height: 1.45;
+    font-size: 18px;
+    color: #777777;
+    text-align: center;
+
+    @include mobile() {
+      font-size: clamp(15px, 0.804rem + 0.67vw, 18px);
+    }
+  }
+
+  &__img {
+    max-width: 300px;
+    max-height: 255px;
+    margin-bottom: 74px;
+
+    @include mobile() {
+      max-width: clamp(200px, 8.036rem + 22.32vw, 300px);
+    }
+  }
+
+  &__btn-return {
+    padding: 14px 40px;
+    border-radius: 30px;
+
+    background-color: #000;
+    font-family: var(--font-bold);
+    color: #ffffff;
+
+    &:hover {
+      transition: background-color 0.2s ease-in;
+      background-color: #525252;
+    }
+  }
+}

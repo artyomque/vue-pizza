@@ -1,0 +1,105 @@
+@import '@/assets/scss/main.scss';
+
+.cart-item {
+  border-top: 1px solid var(--delimiter);
+  padding: 30px 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @include mobile() {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  &__info {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+
+  &__img {
+    width: 80px;
+    height: 80px;
+  }
+
+  &__desc {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  &__title {
+    font-family: var(--font-bold);
+    font-size: 22px;
+    width: 250px;
+
+    @include mobile() {
+      font-size: clamp(17px, 0.839rem + 1.12vw, 22px);
+      max-width: 175px;
+    }
+  }
+
+  &__details {
+    font-family: var(--font-regular);
+    font-size: 16px;
+    color: #8d8d8d;
+
+    @include mobile() {
+      font-size: clamp(0.875rem, 0.786rem + 0.45vw, 1rem);
+    }
+  }
+}
+
+.item-controls {
+  display: flex;
+  gap: clamp(24px, -3.429rem + 10.27vw, 93px);
+  align-items: center;
+  justify-content: space-between;
+
+  &__wrapper {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  &__decrease {
+    padding: 4px 9px;
+    border: 3px solid var(--button-accent);
+    border-radius: 50%;
+  }
+
+  &__increase {
+    padding: 4px 8px;
+    border: 3px solid var(--button-accent);
+    border-radius: 50%;
+  }
+
+  &__counter {
+    width: 22px;
+    font-family: var(--font-bold);
+    font-size: 22px;
+    text-align: center;
+
+    @include mobile() {
+      font-size: 19px;
+    }
+  }
+
+  &__price {
+    font-family: var(--font-bold);
+    font-size: 22px;
+    text-wrap: nowrap;
+
+    @include mobile() {
+      font-size: 19px;
+    }
+  }
+
+  &__remove-btn {
+    padding: 4px 8px;
+    border: 3px solid #d7d7d7;
+    border-radius: 50%;
+  }
+}

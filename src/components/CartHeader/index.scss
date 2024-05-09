@@ -1,0 +1,45 @@
+@import '@/assets/scss/main.scss';
+
+.cart {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    align-items: flex-end;
+
+    @include mobile-xs() {
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+  }
+
+  &__title {
+    display: flex;
+    font-family: var(--font-bold);
+    font-size: 32px;
+    gap: 17px;
+
+    &::before {
+      content: url('/cart2.svg');
+    }
+  }
+
+  &__clear-btn {
+    display: flex;
+    gap: 7px;
+
+    font-family: var(--font-regular);
+    font-size: 16px;
+    color: #b6b6b6;
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 5px;
+    }
+
+    &::before {
+      content: url('/trash.svg');
+    }
+  }
+}

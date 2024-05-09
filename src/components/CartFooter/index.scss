@@ -1,0 +1,82 @@
+@import '@/assets/scss/main.scss';
+
+.order {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 40px;
+
+  @include mobile-xs() {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__total {
+    font-family: var(--font-regular);
+    font-size: 22px;
+    letter-spacing: 0.01em;
+
+    &-counter {
+      font-family: var(--font-bold);
+    }
+
+    &-price {
+      font-family: var(--font-bold);
+      color: var(--text-accent);
+    }
+  }
+}
+
+.cart-controls {
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 16px;
+
+  @include mobile-xs() {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 15px;
+  }
+
+  &__btn-return {
+    display: flex;
+    padding: 18px 28px;
+    max-width: 207px;
+    border-radius: 30px;
+    border: 2px solid #d3d3d3;
+
+    gap: 14px;
+    background-color: #ffffff;
+    font-family: var(--font-regular);
+    color: #d3d3d3;
+
+    &:hover {
+      transition: all 0.2s ease-in;
+      border: 2px solid #b0b0b0;
+      color: #b0b0b0;
+    }
+
+    &:hover .cart-controls__arrow-left {
+      transition: stroke 0.2s ease-in;
+      stroke: #b0b0b0;
+    }
+  }
+
+  &__btn-order {
+    display: flex;
+    padding: 18px 42px;
+    max-width: 216px;
+    border-radius: 30px;
+    border: 2px solid var(--button-accent);
+
+    background-color: var(--button-accent);
+    font-family: var(--font-bold);
+    color: #ffffff;
+
+    &:hover {
+      transition: background-color 0.2s ease-in;
+      background-color: #ff8234;
+    }
+  }
+}

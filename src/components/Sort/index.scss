@@ -1,0 +1,58 @@
+@import '@/assets/scss/main.scss';
+
+.sort-section {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 32px;
+
+  justify-content: space-between;
+  align-items: center;
+
+  @include mobile() {
+    flex-direction: column;
+    align-items: normal;
+  }
+}
+
+.pizza-type {
+  display: flex;
+  gap: 9px;
+  overflow-x: auto;
+
+  &__button {
+    padding: 15px 35px;
+    border-radius: 30px;
+
+    background-color: var(--button-type);
+
+    font-family: var(--font-bold);
+    font-size: 16px;
+    letter-spacing: 0.3px;
+
+    &:hover {
+      transition: background-color 0.3s ease-in;
+      background-color: #d2d1d1;
+    }
+
+    &--active {
+      padding: 15px 35px;
+      border-radius: 30px;
+
+      font-family: var(--font-bold);
+      font-size: 16px;
+      letter-spacing: 0.3px;
+
+      color: #fff;
+      background-color: var(--button-type-accent);
+    }
+  }
+}
+
+.select__wrapper {
+  display: flex;
+  gap: 10px;
+
+  font-family: var(--font-bold);
+  font-size: 14px;
+  text-wrap: nowrap;
+}
