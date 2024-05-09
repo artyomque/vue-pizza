@@ -23,18 +23,13 @@ const pages = computed(() => {
 
 <template>
   <div class="pagination">
-    <button
-      type="button"
-      :class="[page === currentPage ? 'pagination__btn--active' : 'pagination__btn']"
-      v-for="page in pages"
-      :key="page"
-      @click="onClickChangePage(page)"
-    >
+    <button type="button" :class="[page === currentPage ? 'pagination__btn--active' : 'pagination__btn']"
+      v-for="page in pages" :key="page" @click="onClickChangePage(page)">
       <div class="pagination__btn-page">{{ page }}</div>
     </button>
   </div>
 </template>
 
 <style lang="scss" scoped>
-@import './Index.scss';
+@import './index.scss';
 </style>

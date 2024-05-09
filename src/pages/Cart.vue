@@ -1,11 +1,11 @@
 <script setup>
 import { storeToRefs } from 'pinia'
-import { useCartStore } from '../stores/cartStore'
+import { useCartStore } from '@/stores/cartStore'
 
-import CartHeader from '@/components/CartHeader/Index.vue'
-import CartItemList from '@/components/CartItemList/Index.vue'
-import CartFooter from '@/components/CartFooter/Index.vue'
-import InfoBlock from '@/components/InfoBlock/Index.vue'
+import CartHeader from '@/components/CartHeader/index.vue'
+import CartItemList from '@/components/CartItemList/index.vue'
+import CartFooter from '@/components/CartFooter/index.vue'
+import InfoBlock from '@/components/InfoBlock/index.vue'
 
 const cartStore = useCartStore()
 const { cart } = storeToRefs(cartStore)

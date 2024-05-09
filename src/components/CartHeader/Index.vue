@@ -16,5 +16,5 @@ function onClickClear() {
 </template>
 
 <style lang="scss" scoped>
-@import './Index.scss';
+@import './index.scss';
 </style>

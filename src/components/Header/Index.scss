@@ -1,4 +1,4 @@
-@import '../../assets/scss/main.scss';
+@import '@/assets/scss/main.scss';
 
 .header {
   margin-bottom: 40px;
@@ -34,6 +34,9 @@
   }
 
   &__info-desc {
+    @include mobile-sm() {
+      text-align: center;
+    }
   }
 
   &__subtitle {

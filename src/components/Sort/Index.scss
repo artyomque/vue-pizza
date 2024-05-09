@@ -1,4 +1,4 @@
-@import '../../assets/scss/main.scss';
+@import '@/assets/scss/main.scss';
 
 .sort-section {
   display: flex;
@@ -49,10 +49,10 @@
 }
 
 .select__wrapper {
+  display: flex;
+  gap: 10px;
+
   font-family: var(--font-bold);
   font-size: 14px;
   text-wrap: nowrap;
-
-  &__option {
-  }
 }

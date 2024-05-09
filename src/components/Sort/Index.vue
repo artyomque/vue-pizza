@@ -1,7 +1,20 @@
 <script setup>
-import { ref, inject } from 'vue'
+import { ref, inject, watch } from 'vue'
+
+import Dropdown from '@/components/Dropdown/index.vue'
 
 const { filters } = inject('filters')
+
+const options = ref([
+  { name: 'популярности ↓', value: '-popularity' },
+  { name: 'популярности ↑', value: 'popularity' },
+  { name: 'цене ↓', value: '-price' },
+  { name: 'цене ↑', value: 'price' },
+  { name: 'алфавиту ↓', value: '-title' },
+  { name: 'алфавиту ↑', value: 'title' }
+])
+
+const parentSelectedOption = ref(options.value[0])
 
 function onChangeType(value, index) {
   typeButtons.value.forEach((button, i) =>
@@ -9,10 +22,6 @@ function onChangeType(value, index) {
   )
 
   filters.pizzaType = value
-}
-
-function onChangeSelect(event) {
-  filters.sortBy = event.target.value
 }
 
 const typeButtons = ref([
@@ -47,6 +56,10 @@ const typeButtons = ref([
     isSelected: false
   }
 ])
+
+watch(parentSelectedOption, () => {
+  filters.sortBy = parentSelectedOption.value.value
+})
 </script>
 
 <template>
@@ -64,15 +77,11 @@ const typeButtons = ref([
     </div>
     <div class="select__wrapper">
       Сортировка по:
-      <select @change="onChangeSelect" class="select__option" name="sort" id="sort">
-        <option value="-popularity">популярности</option>
-        <option value="price">цене</option>
-        <option value="title">алфавиту</option>
-      </select>
+      <Dropdown :options="options" v-model="parentSelectedOption" />
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-@import './Index.scss';
+@import './index.scss';
 </style>

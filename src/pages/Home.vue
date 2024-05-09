@@ -3,12 +3,15 @@ import { reactive, provide, watch, onMounted, computed, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import axios from 'axios'
 
-import Sort from '@/components/Sort/Index.vue'
-import CardList from '@/components/CardList/Index.vue'
-import Pagination from '@/components/Pagination/Index.vue'
+import Sort from '@/components/Sort/index.vue'
+import CardList from '@/components/CardList/index.vue'
+import Pagination from '@/components/Pagination/index.vue'
+import Loader from '@/components/Loader/index.vue'
 import { usePaginationStore } from '@/stores/paginationStore'
 
 const items = ref([])
+
+const isLoading = ref(false)
 
 const paginationStore = usePaginationStore()
 const { currentPage, itemsPerPage } = storeToRefs(paginationStore)
@@ -25,35 +28,68 @@ const filters = reactive({
   pizzaType: 'all'
 })
 
-async function fetchItems() {
+/* async function fetchItems() {
+  isLoading.value = true
   try {
     const params = {
       sortBy: filters.sortBy
     }
     const { data } = await axios.get('https://2d78f5128d00b9fb.mokky.dev/items', { params })
 
-    if (filters.pizzaType !== 'all') {
-      const filtered = data.filter((item) => item.categories.includes(filters.pizzaType))
-      items.value = filtered
-    } else {
-      items.value = data
+    const filteredData =
+      filters.pizzaType !== 'all'
+        ? data.filter((item) => item.categories.includes(filters.pizzaType))
+        : data
+
+    const getPrice = (item) => item.price.small ?? item.price.medium ?? item.price.large
+
+    if (filters.sortBy === 'price' || filters.sortBy === '-price') {
+      const sortOrder = filters.sortBy === 'price' ? 1 : -1
+      filteredData.sort((a, b) => sortOrder * (getPrice(a) - getPrice(b)))
     }
 
-    if (filters.sortBy === 'price') {
-      items.value.sort((a, b) => {
-        const getPrice = (item) => {
-          if (item.price.small !== null) return item.price.small
-          if (item.price.medium !== null) return item.price.medium
-          if (item.price.large !== null) return item.price.large
-        }
-
-        return getPrice(a) - getPrice(b)
-      })
-    }
-
-    return data
+    items.value = filteredData
+    return filteredData
   } catch (e) {
-    console.log(e)
+    console.error(e)
+    throw e
+  } finally {
+    isLoading.value = false
+  }
+} */
+
+async function fetchData(params) {
+  const { data } = await axios.get('https://2d78f5128d00b9fb.mokky.dev/items', { params })
+  return data
+}
+
+function filterData(data, pizzaType) {
+  return pizzaType !== 'all' ? data.filter((item) => item.categories.includes(pizzaType)) : data
+}
+
+function sortData(data, sortBy) {
+  const getPrice = (item) => item.price.small ?? item.price.medium ?? item.price.large
+  const sortOrder = sortBy === 'price' ? 1 : -1
+  return data.sort((a, b) => sortOrder * (getPrice(a) - getPrice(b)))
+}
+
+async function fetchItems() {
+  isLoading.value = true
+  try {
+    const data = await fetchData({ sortBy: filters.sortBy })
+    const filteredData = filterData(data, filters.pizzaType)
+    if (filters.sortBy !== 'price' && filters.sortBy !== '-price') {
+      items.value = filteredData
+      return items.value
+    }
+
+    items.value = sortData(filteredData, filters.sortBy)
+    return items.value
+  } catch (e) {
+    console.error(e)
+    throw e
+  } finally {
+    isLoading.value = false
   }
 }
 
@@ -72,8 +108,19 @@ onMounted(async () => {
 
 <template>
   <Sort :filters="filters" />
-  <CardList :items="displayedItems" />
-  <Pagination :items="items" />
+  <div v-if="isLoading" class="loader--home">
+    <Loader />
+  </div>
+  <div v-else>
+    <CardList :items="displayedItems" />
+    <Pagination :items="items" />
+  </div>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+.loader--home {
+  display: flex;
+  justify-content: center;
+  margin-top: 150px;
+}
+</style>
